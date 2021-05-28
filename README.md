@@ -11,6 +11,10 @@ Lancer  `` composer install ``
 
 Executez la commande ``php bin/console doctrine:database:create ``
 
+Suivi de ``php bin/console make:migration ``
+
+et de ``php bin/console make:migrations:migrate ``
+
 ## GetSocietyBySiret
 
 Executez la commande ``php bin/console app:get-society  {{siret}}``
