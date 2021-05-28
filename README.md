@@ -13,7 +13,7 @@ Executez la commande ``php bin/console doctrine:database:create ``
 
 Suivi de ``php bin/console make:migration ``
 
-et de ``php bin/console make:migrations:migrate ``
+et de ``php bin/console doctrine:migrations:migrate ``
 
 ## GetSocietyBySiret
 
