@@ -25,8 +25,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class GetSocieteBySiretCommand extends Command
 {
 
-
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
