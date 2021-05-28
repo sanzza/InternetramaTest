@@ -46,7 +46,24 @@ class SocieteController extends AbstractController
                 ],
             ]);
 
-            dd($response->toArray());
+            $nom = $response->getInfo('denominationUniteLegale');
+            $nic = $response->getInfo('nic');
+            $siren = $response->getInfo('siren');
+            $dateCreation = $response->getInfo('dateCreationEtablissement');
+            $anneeEffectif =$response->getInfo('anneeEffectifsEtablissement');
+
+            $society->setNom($nom);
+            $society->setNic($nic);
+            $society->setSiren($siren);
+            $society->setDateCreationEtablissement($dateCreation );
+            $society->setAnneeEffectifEtablissement($anneeEffectif);
+
+            $entityManager->persist($society);
+            $entityManager->flush();
+
+            return $this->render('societe/index.html.twig', [
+                'society' => $society,
+            ]);
 
         }
 

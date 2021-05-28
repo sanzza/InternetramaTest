@@ -18,6 +18,10 @@ class Societe
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $siren;
@@ -45,6 +49,17 @@ class Societe
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+
+    public function getNom()
+    {
+        return $this -> nom;
+    }
+
+    public function setNom($nom): void
+    {
+        $this -> nom = $nom;
     }
 
     public function getSiren(): ?int
