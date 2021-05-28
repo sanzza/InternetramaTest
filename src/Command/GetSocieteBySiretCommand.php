@@ -70,7 +70,7 @@ class GetSocieteBySiretCommand extends Command
 
         $output->writeln("Nom de la société : "         .$nom           );
         $output->writeln("Siren : "                     .$siren         );
-        $output->writeln("Nic :"                        .$nic           );
+        $output->writeln("Nic : "                       .$nic           );
         $output->writeln("Date creation de la société :".$dateCreation  );
         $output->writeln("Annee effectif :"             .$anneeEffectif );
 
@@ -78,7 +78,7 @@ class GetSocieteBySiretCommand extends Command
 
         $society->setSiret($siret);
         $society->setNom($nom);
-
+        $society->setNic($nic);
         $society->setSiren($siren);
         $society->setDateCreationEtablissement($dateCreation);
         $society->setAnneeEffectifEtablissement($anneeEffectif);

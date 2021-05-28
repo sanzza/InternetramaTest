@@ -32,7 +32,7 @@ class Societe
     private $siret;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $nic;
 
@@ -91,7 +91,7 @@ class Societe
         return $this->nic;
     }
 
-    public function setNic(?int $nic): self
+    public function setNic( $nic): self
     {
         $this->nic = $nic;
 
