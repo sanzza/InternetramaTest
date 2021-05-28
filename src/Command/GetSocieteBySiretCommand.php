@@ -4,6 +4,7 @@
 namespace App\Command;
 
 
+use App\Entity\Societe;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,8 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+
+/**
+ * @property EntityManagerInterface entityManager
+ */
 class GetSocieteBySiretCommand extends Command
 {
+
+
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+
+        parent::__construct();
+    }
+
     protected static $defaultName = 'app:get-society';
 
     protected function configure()
@@ -44,9 +59,42 @@ class GetSocieteBySiretCommand extends Command
             ],
         ]);
 
+        $siret = $input->getArgument('siret');
+
         $array = $response->toArray();
-        $output->write("Nom de la société : ".$array['etablissement']['uniteLegale']['denominationUniteLegale']);
+
+        $nom            = $array['etablissement']['uniteLegale']['denominationUniteLegale'];
+        $siren          = $array['etablissement']['siren'];
+        $nic            = $array['etablissement']['nic'] ;
+        $dateCreation   = $array['etablissement']['dateCreationEtablissement'] ;
+        $anneeEffectif  = $array['etablissement']['anneeEffectifsEtablissement'];
+
+
+        $output->writeln("Nom de la société : "         .$nom           );
+        $output->writeln("Siren : "                     .$siren         );
+        $output->writeln("Nic :"                        .$nic           );
+        $output->writeln("Date creation de la société :".$dateCreation  );
+        $output->writeln("Annee effectif :"             .$anneeEffectif );
+
+        $society = new Societe();
+
+        $society->setSiret($siret);
+        $society->setNom($nom);
+
+        $society->setSiren($siren);
+        $society->setDateCreationEtablissement($dateCreation);
+        $society->setAnneeEffectifEtablissement($anneeEffectif);
+
+        $this->entityManager->persist($society);
+        $this->entityManager->flush();
+
+        $output->writeln("La société a été enregistrée en BDD");
+
+
         return Command::SUCCESS;
+
     }
+
+
 
 }

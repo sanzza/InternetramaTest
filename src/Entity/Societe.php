@@ -37,7 +37,7 @@ class Societe
     private $nic;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $dateCreationEtablissement;
 
@@ -103,12 +103,15 @@ class Societe
         return $this->dateCreationEtablissement;
     }
 
-    public function setDateCreationEtablissement(?\DateTimeInterface $dateCreationEtablissement): self
+    /**
+     * @param mixed $dateCreationEtablissement
+     */
+    public function setDateCreationEtablissement($dateCreationEtablissement): void
     {
-        $this->dateCreationEtablissement = $dateCreationEtablissement;
-
-        return $this;
+        $this -> dateCreationEtablissement = $dateCreationEtablissement;
     }
+
+
 
     public function getAnneeEffectifEtablissement(): ?int
     {
